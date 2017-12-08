@@ -21,7 +21,8 @@
                     <div class="emp-response"></div>
                     <form role="form" id="addEmployee" data-toggle="validator">
                         <div class="row">
-                            <div class="form-group col-lg-6">
+						<div class="col-lg-12">
+                            <div class="form-group col-lg-3">
                                 <label>Staff</label>
                                 <select class="form-control" id="staff_type" required data-error="Select Staff Type">
                                     <option selected disabled>Select Staff Type</option>
@@ -38,7 +39,7 @@
                                 <div class="help-block with-errors"></div>
                             </div>
 
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-3">
                                 <label>Shift</label>
                                 <select class="form-control" id="shift" required data-error="Select Shift Type">
                                     <option selected disabled>Select Staff Type</option>
@@ -55,21 +56,23 @@
                                 <div class="help-block with-errors"></div>
                             </div>
 
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-3">
                                 <label>First Name</label>
                                 <input type="text" class="form-control" placeholder="First Name" id="first_name" required data-error="Enter First Name">
                                 <div class="help-block with-errors"></div>
                             </div>
 
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-3">
                                 <label>Last Name</label>
                                 <input type="text" class="form-control" placeholder="Last Name" id="last_name">
                             </div>
-
-                            <div class="form-group col-lg-6">
-                                <label>ID Card Type</label>
+							</div>
+							
+							<div class="col-lg-12">
+                            <div class="form-group col-lg-3">
+                                <label>Bank Card Type</label>
                                 <select class="form-control" id="id_card_id" required onchange="validId(this.value);">
-                                    <option selected disabled>Select ID Card Type</option>
+                                    <option selected disabled>Select Bank Card Type</option>
                                     <?php
                                     $query = "SELECT * FROM id_card_type";
                                     $result = mysqli_query($connection, $query);
@@ -83,28 +86,50 @@
                                 <div class="help-block with-errors"></div>
                             </div>
 
-                            <div class="form-group col-lg-6">
-                                <label>ID Card No</label>
-                                <input type="text" class="form-control" placeholder="ID Card No" id="id_card_no" required>
+                            <div class="form-group col-lg-3">
+                                <label>Bank Account Number</label>
+                                <input type="text" class="form-control" placeholder="Bank Account No" id="id_card_no" required>
                                 <div class="help-block with-errors"></div>
                             </div>
-                            <div class="form-group col-lg-6">
+						
+                            <div class="form-group col-lg-3">
                                 <label>Contact Number</label>
                                 <input type="number" class="form-control" placeholder="Contact Number" id="contact_no" required>
                                 <div class="help-block with-errors"></div>
                             </div>
 
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-3">
                                 <label>Address</label>
                                 <input type="text" class="form-control" placeholder="address" id="address" required>
                                 <div class="help-block with-errors"></div>
                             </div>
-
-                            <div class="form-group col-lg-6">
+							</div>
+							
+							<div class="col-lg-12">
+                            <div class="form-group col-lg-3">
                                 <label>Salary</label>
                                 <input type="number" class="form-control" placeholder="Salary" id="salary" data-error="Enter Salary" required>
                                 <div class="help-block with-errors"></div>
                             </div>
+							
+							<div class="form-group col-lg-3">
+                            <label>Date of Birth</label>
+                            <input type="date" class="form-control" placeholder="Date of Birth" id="dob">
+							<div class="help-block with-errors"></div>
+                            </div>
+							
+							<div class="form-group col-lg-3">
+                            <label>Username</label>
+                            <input type="text" class="form-control" placeholder="Username" id="username">
+							<div class="help-block with-errors"></div>
+                            </div>
+							
+							<div class="form-group col-lg-3">
+                            <label>Password</label>
+                            <input type="password" class="form-control" placeholder="Password" id="password">
+							<div class="help-block with-errors"></div>
+                            </div>
+							</div>
 
                         </div>
 

@@ -43,6 +43,7 @@
                             <th>Shift</th>
                             <th>Joining Date</th>
                             <th>Salary</th>
+							<th>Date of Birth</th>
                             <th>Change Shift</th>
                             <th>Action</th>
                         </tr>
@@ -63,6 +64,7 @@
                                     <td><?php echo $staff['shift'] . ' - ' . $staff['shift_timing']; ?></td>
                                     <td><?php echo date('M j, Y', strtotime($staff['joining_date'])); ?></td>
                                     <td><?php echo $staff['salary']; ?></td>
+									<td><?php echo $staff['dob']; ?></td>
                                     <td>
                                         <button class="btn btn-primary" data-toggle="modal" data-target="#changeShift"
                                                 data-id="<?php echo $staff['emp_id']; ?>" id="change_shift">Change Shift</button>
@@ -76,8 +78,7 @@
                                         <a href='functionmis.php?empid=<?php echo $staff['emp_id']; ?>'
                                            class="btn btn-danger" onclick="return confirm('Are you Sure?')"><i
                                                     class="fa fa-trash"></i></a>
-                                        <a href='index.php?emp_history&empid=<?php echo $staff['emp_id']; ?>'
-                                           class="btn btn-success" title="Employee Histery"><i class="fa fa-eye"></i></a>
+                   
                                     </td>
                                 </tr>
 
@@ -204,8 +205,8 @@ if (mysqli_num_rows($staff_result) > 0) {
                                                 </div>
 
                                                 <div class="form-group col-lg-6">
-                                                    <label>ID Card No</label>
-                                                    <input type="text" class="form-control" placeholder="ID Card No"
+                                                    <label>Bank Account No</label>
+                                                    <input type="text" class="form-control" placeholder="Bank Account No"
                                                            id="id_card_no"
                                                            value="<?php echo $staffGlobal['id_card_no']; ?>"
                                                            name="id_card_no" required>
@@ -230,6 +231,27 @@ if (mysqli_num_rows($staff_result) > 0) {
                                                     <input type="number" class="form-control" placeholder="Salary"
                                                            id="salary" value="<?php echo $staffGlobal['salary']; ?>"
                                                            name="salary" required>
+                                                </div>
+												
+												<div class="form-group col-lg-6">
+                                                    <label>Date of Birth</label>
+                                                    <input type="date" class="form-control" placeholder="Date of Birth"
+                                                           id="dob" value="<?php echo $staffGlobal['dob']; ?>"
+                                                           name="dob" required>
+                                                </div>
+												
+												<div class="form-group col-lg-6">
+                                                    <label>Username</label>
+                                                    <input type="text" class="form-control" placeholder="Username"
+                                                           id="username" value="<?php echo $staffGlobal['username']; ?>"
+                                                           name="username" required>
+                                                </div>
+												
+												<div class="form-group col-lg-6">
+                                                    <label>Password</label>
+                                                    <input type="password" class="form-control" placeholder="Password"
+                                                           id="password" value="<?php echo $staffGlobal['password']; ?>"
+                                                           name="password" required>
                                                 </div>
 
                                             </div>

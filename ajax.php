@@ -3,24 +3,41 @@ include_once 'db.php';
 session_start();
 
 if (isset($_POST['login'])) {
-    $email = $_POST['email'];
+    $username = $_POST['username'];
     $password = $_POST['password'];
+	$staff_type_id = $_GET['staff_type_id'];
 
-    if (!$email && !$password) {
+    if (!$username && !$password && !$staff_type_id) {
         header('Location:login.php?empty');
     } else {
-        $password = md5($password);
-        $query = "SELECT * FROM user WHERE username = '$email' OR email='$email' AND password='$password'";
+
+        $query = "SELECT * FROM staff WHERE username = '$username' AND password='$password' AND staff_type_id=1";
         $result = mysqli_query($connection, $query);
+		$queryy = "SELECT * FROM staff WHERE username = '$username' AND password='$password' AND staff_type_id=2";
+        $resultt = mysqli_query($connection, $queryy);
+		$queryyy = "SELECT * FROM staff WHERE username = '$username' AND password='$password' AND staff_type_id=3";
+        $resulttt = mysqli_query($connection, $queryyy);
         if (mysqli_num_rows($result) == 1) {
             $user = mysqli_fetch_assoc($result);
             $_SESSION['username'] = $user['username'];
-            $_SESSION['user_id'] = $user['id'];
-            header('Location:index.php?room_mang');
-        } else {
-            header('Location:login.php?loginE');
+            $_SESSION['user_id'] = $user['emp_id'];
+            header('Location:index.php');
+        } 
+		else if (mysqli_num_rows($resultt) == 1){
+			$user = mysqli_fetch_assoc($resultt);
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['user_id'] = $user['emp_id'];
+            header('Location:index3.php');
         }
-    }
+		else if (mysqli_num_rows($resulttt) == 1){
+			$user = mysqli_fetch_assoc($resulttt);
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['user_id'] = $user['emp_id'];
+            header('Location:index2.php');
+        } else {
+			header('Location:login.php?loginE');
+		}
+    } 
 }
 
 if (isset($_POST['add_room'])) {
@@ -315,17 +332,47 @@ if (isset($_POST['add_employee'])) {
     $id_card_no = $_POST['id_card_no'];
     $address = $_POST['address'];
     $salary = $_POST['salary'];
+	$dob = $_POST['dob'];
+	$username = $_POST['username'];
+	$password = $_POST['password'];
 
     if ($staff_type == '' && $shift == '' && $salary == ''){
         $response['done'] = false;
-        $response['data'] = "Please Enter Carednalities";
+        $response['data'] = "Please Enter Cardinalities";
     }else{
-        $customer_sql = "INSERT INTO staff (emp_name,staff_type_id,shift_id,id_card_type,id_card_no,address,contact_no,salary) VALUES ('$name','$staff_type','$shift','$id_card_id','$id_card_no','$address','$contact_no','$salary')";
+        $customer_sql = "INSERT INTO staff (emp_name,staff_type_id,shift_id,id_card_type,id_card_no,address,contact_no,salary,dob,username,password) VALUES ('$name','$staff_type','$shift','$id_card_id','$id_card_no','$address','$contact_no','$salary','$dob','$username','$password')";
         $customer_result = mysqli_query($connection, $customer_sql);
-        $emp_id = mysqli_insert_id($connection);
-        $insert = "INSERT INTO emp_history (emp_id,shift_id) VALUES ('$emp_id','$shift')";
-        $insert_result = mysqli_query($connection,$insert);
-        if ($customer_result && $insert_result) {
+        //$emp_id = mysqli_insert_id($connection);
+        if ($customer_result) {
+            $response['done'] = true;
+            $response['data'] = 'Successfully Booking';
+        } else {
+            $response['done'] = false;
+            $response['data'] = "DataBase Error in status change";
+        }
+    }
+    echo json_encode($response);
+}
+
+if (isset($_POST['add_housekeep'])) {
+
+	$duty_remark = $_POST['duty_remark'];
+    $schedule_startdate = $_POST['schedule_startdate'];
+    $schedule_enddate = $_POST['schedule_enddate'];
+    $emp_id = $_POST['emp_id'];
+    $duty_id = $_POST['duty_id'];
+
+    
+
+    if ($emp_id == '' && $duty_id == '' && $schedule_startdate == '' && $schedule_enddate == ''){
+        $response['done'] = false;
+        $response['data'] = "Please Enter Cardinalities";
+    }else{
+       $customer_sql = "INSERT INTO housekeeping (duty_remark,schedule_startdate,schedule_enddate,emp_id,duty_id) VALUES ('$duty_remark','$schedule_startdate','$schedule_enddate','$emp_id','$duty_id')";
+        
+		$customer_result = mysqli_query($connection, $customer_sql);
+        //$housekeeping_id = mysqli_insert_id($connection);
+        if ($customer_result) {
             $response['done'] = true;
             $response['data'] = 'Successfully Booking';
         } else {
@@ -369,13 +416,9 @@ if (isset($_POST['change_shift'])) {
     $shift_id = $_POST['shift_id'];
     $query = "UPDATE staff set shift_id = '$shift_id' WHERE emp_id='$emp_id'";
     $result = mysqli_query($connection, $query);
-    $to_date = date("Y-m-d H:i:s");
-    $update = "UPDATE emp_history SET to_date = '$to_date' WHERE emp_id = '$emp_id' AND to_date IS NULL";
-    $update_result = mysqli_query($connection,$update);
-    $insert = "INSERT INTO emp_history (emp_id,shift_id) VALUES ('$emp_id','$shift_id')";
-    $insert_result = mysqli_query($connection,$insert);
 
-    if ($result && $insert_result && $update_result) {
+
+    if ($result) {
         header("Location:index.php?staff_mang&success");
     } else {
         header("Location:index.php?staff_mang&error");

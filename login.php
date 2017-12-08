@@ -34,8 +34,8 @@
             <div class="row">
                 <div class="form-group col-lg-12">
                     <label></label>
-                    <input type="text" name="email" class="form-control" placeholder="Username/Email Address" required
-                           data-error="Enter Username or Email">
+                    <input type="text" name="username" class="form-control" placeholder="Username" required
+                           data-error="Enter Username">
                     <div class="help-block with-errors"></div>
                 </div>
                 <div class="form-group col-lg-12">

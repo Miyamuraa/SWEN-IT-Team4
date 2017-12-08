@@ -41,12 +41,12 @@ if (isset($_POST['submit'])) {
     $address = $_POST['address'];
     $contact_no = $_POST['contact_no'];
     $joining_date = strtotime($_POST['joining_date']);
-
     $salary = $_POST['salary'];
+	$dob = $_POST['dob'];
 
     $query="UPDATE staff
 SET emp_name='$first_name $last_name', staff_type_id='$staff_type_id', shift_id='$shift_id', id_card_type=$id_card_type,
-id_card_no='$id_card_no',address='$address',contact_no='$contact_no',joining_date='$joining_date',salary='$salary'
+id_card_no='$id_card_no',address='$address',contact_no='$contact_no',joining_date='$joining_date',salary='$salary', dob='$dob'
 WHERE emp_id=$emp_id ";
 //echo $query;
     if (mysqli_query($connection, $query)) {
@@ -64,6 +64,29 @@ if (isset($_GET['empid'])!="")
     $deleteQuery = "DELETE FROM staff WHERE emp_id=$emp_id";
     if (mysqli_query($connection, $deleteQuery)) {
         header('Location: index.php?staff_mang');
+    } else {
+        echo "Error updating record: " . mysqli_error($connection);
+    }
+}
+
+
+
+
+if (isset($_POST['submit2'])) {
+
+    $housekeeping_id = $_POST['housekeeping_id'];
+	$duty_remark = $_POST['duty_remark'];
+    $schedule_startdate = $_POST['schedule_startdate'];
+    $schedule_enddate = $_POST['schedule_enddate'];
+	$emp_id = $_POST['emp_id'];
+	$duty_id = $_POST['duty_id'];
+	
+    $query="UPDATE housekeeping 
+SET duty_remark='$duty_remark', schedule_startdate='$schedule_startdate', schedule_enddate='$schedule_enddate', emp_id=$emp_id, duty_id=$duty_id 
+WHERE housekeeping_id=$housekeeping_id ";
+//echo $query;
+    if (mysqli_query($connection, $query)) {
+        header('Location: index3.php?housekeeping');
     } else {
         echo "Error updating record: " . mysqli_error($connection);
     }

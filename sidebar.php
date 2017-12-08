@@ -5,8 +5,9 @@
             <img src="http://icons.iconarchive.com/icons/graphicloads/colorful-long-shadow/64/User-icon.png" class="img-responsive" alt="">
         </div>
         <div class="profile-usertitle">
-            <div class="profile-usertitle-name"><?php echo $user['name'];?></div>
+            <div class="profile-usertitle-name"><?php echo $user['emp_name'];?></div>
             <div class="profile-usertitle-status"><span class="indicator label-success"></span>Manager</div>
+			<!--<?php echo $user['staff_type_id'];?>-->
         </div>
         <div class="clear"></div>
     </div>
@@ -64,36 +65,21 @@
                     Add Employee
                 </a>
             </li>
-        <?php }
-        if (isset($_GET['complain'])){ ?>
+		<?php }
+        if (isset($_GET['add_housekeep'])){ ?>
             <li class="active">
-                <a href="index.php?complain"><em class="fa fa-envelope">&nbsp;</em>
-                    Complain
+                <a href="index.php?add_housekeep"><em class="fa fa-plus">&nbsp;</em>
+                    Add Housekeeping
                 </a>
             </li>
         <?php } else{?>
             <li>
-                <a href="index.php?complain"><em class="fa fa-envelope">&nbsp;</em>
-                    Complain
+                <a href="index.php?add_housekeep"><em class="fa fa-plus">&nbsp;</em>
+                    Add Housekeeping
                 </a>
             </li>
-        <?php }
-        ?>
-
-        <?php
-        if (isset($_GET['statistics'])){ ?>
-            <li class="active">
-                <a href="index.php?statistics"><em class="fa fa-eject">&nbsp;</em>
-                    Statistics
-                </a>
-            </li>
-        <?php } else{?>
-        <li>
-            <a href="index.php?statistics"><em class="fa fa-eject">&nbsp;</em>
-                Statistics
-            </a>
-        </li>
 <?php }?>
+
 
         <li><a href="logout.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
     </ul>

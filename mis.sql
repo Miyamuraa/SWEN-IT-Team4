@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2017 at 02:08 PM
+-- Generation Time: Dec 08, 2017 at 11:27 AM
 -- Server version: 10.1.28-MariaDB
--- PHP Version: 7.1.10
+-- PHP Version: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -47,7 +47,7 @@ CREATE TABLE `booking` (
 INSERT INTO `booking` (`booking_id`, `customer_id`, `room_id`, `booking_date`, `check_in`, `check_out`, `total_price`, `remaining_price`, `payment_status`) VALUES
 (1, 1, 5, '2017-11-13 05:45:17', '13-11-2017', '15-11-2017', 3000, 3000, 0),
 (2, 2, 2, '2017-11-13 05:46:04', '13-11-2017', '16-11-2017', 6000, 0, 1),
-(3, 3, 2, '2017-11-11 06:49:19', '11-11-2017', '14-11-2017', 6000, 6000, 0),
+(3, 3, 2, '2017-11-11 06:49:19', '11-11-2017', '14-11-2017', 6000, 0, 1),
 (4, 4, 7, '2017-11-09 06:50:24', '11-11-2017', '15-11-2017', 10000, 10000, 0),
 (5, 5, 13, '2017-11-17 06:59:10', '17-11-2017', '20-11-2017', 12000, 0, 1);
 
@@ -108,42 +108,45 @@ INSERT INTO `customer` (`customer_id`, `customer_name`, `contact_no`, `email`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `emp_history`
+-- Table structure for table `duty`
 --
 
-CREATE TABLE `emp_history` (
-  `id` int(11) NOT NULL,
-  `emp_id` int(11) NOT NULL,
-  `shift_id` int(11) NOT NULL,
-  `from_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `to_date` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE `duty` (
+  `duty_id` int(1) NOT NULL,
+  `duty_type` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `emp_history`
+-- Dumping data for table `duty`
 --
 
-INSERT INTO `emp_history` (`id`, `emp_id`, `shift_id`, `from_date`, `to_date`, `created_at`) VALUES
-(1, 1, 1, '2017-11-13 05:39:06', '2017-11-15 02:22:26', '2017-11-13 05:39:06'),
-(2, 2, 3, '2017-11-13 05:39:39', '2017-11-15 02:22:43', '2017-11-13 05:39:39'),
-(3, 3, 1, '2017-11-13 05:40:18', '2017-11-15 02:22:49', '2017-11-13 05:40:18'),
-(4, 4, 1, '2017-11-13 05:40:56', '2017-11-15 02:22:35', '2017-11-13 05:40:56'),
-(5, 5, 1, '2017-11-13 05:41:31', NULL, '2017-11-13 05:41:31'),
-(6, 6, 3, '2017-11-13 05:42:03', NULL, '2017-11-13 05:42:03'),
-(7, 7, 4, '2017-11-13 05:42:35', '2017-11-18 02:35:02', '2017-11-13 05:42:35'),
-(8, 8, 3, '2017-11-13 05:43:13', '2017-11-18 02:32:26', '2017-11-13 05:43:13'),
-(9, 9, 2, '2017-11-13 05:43:49', NULL, '2017-11-13 05:43:49'),
-(10, 10, 1, '2017-11-13 06:30:45', '2017-11-18 02:34:28', '2017-11-13 06:30:45'),
-(11, 1, 2, '2017-11-15 06:52:26', '2017-11-17 02:23:05', '2017-11-15 06:52:26'),
-(12, 4, 3, '2017-11-15 06:52:35', NULL, '2017-11-15 06:52:35'),
-(13, 2, 3, '2017-11-15 06:52:43', NULL, '2017-11-15 06:52:43'),
-(14, 3, 3, '2017-11-15 06:52:49', NULL, '2017-11-15 06:52:49'),
-(15, 1, 3, '2017-11-17 06:53:05', NULL, '2017-11-17 06:53:05'),
-(16, 8, 1, '2017-11-18 07:02:26', NULL, '2017-11-18 07:02:26'),
-(17, 11, 2, '2017-11-18 07:04:03', NULL, '2017-11-18 07:04:03'),
-(18, 10, 2, '2017-11-18 07:04:28', NULL, '2017-11-18 07:04:28'),
-(19, 7, 2, '2017-11-18 07:05:02', NULL, '2017-11-18 07:05:02');
+INSERT INTO `duty` (`duty_id`, `duty_type`) VALUES
+(1, 'general maintenance'),
+(2, 'room maintenance'),
+(3, 'estate maintenance'),
+(4, 'security');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `housekeeping`
+--
+
+CREATE TABLE `housekeeping` (
+  `housekeeping_id` int(4) NOT NULL,
+  `duty_remark` varchar(150) NOT NULL,
+  `schedule_startdate` date NOT NULL,
+  `schedule_enddate` date NOT NULL,
+  `emp_id` int(11) NOT NULL,
+  `duty_id` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `housekeeping`
+--
+
+INSERT INTO `housekeeping` (`housekeeping_id`, `duty_remark`, `schedule_startdate`, `schedule_enddate`, `emp_id`, `duty_id`) VALUES
+(1, 'cc', '2017-12-31', '2017-12-06', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -161,10 +164,10 @@ CREATE TABLE `id_card_type` (
 --
 
 INSERT INTO `id_card_type` (`id_card_type_id`, `id_card_type`) VALUES
-(1, 'Aadhar Card'),
-(2, 'Voter Id Card'),
-(3, 'Pan Card'),
-(4, 'Driving License');
+(1, 'MasterCard'),
+(2, 'Visa'),
+(3, 'American Express'),
+(4, 'Discover');
 
 -- --------------------------------------------------------
 
@@ -188,7 +191,7 @@ CREATE TABLE `room` (
 
 INSERT INTO `room` (`room_id`, `room_type_id`, `room_no`, `status`, `check_in_status`, `check_out_status`, `deleteStatus`) VALUES
 (1, 2, 'A-101', NULL, 0, 0, 1),
-(2, 2, 'A-102', 1, 0, 1, 0),
+(2, 2, 'A-102', NULL, 0, 1, 0),
 (3, 3, 'A-103', NULL, 0, 0, 0),
 (4, 4, 'A-104', NULL, 0, 0, 0),
 (5, 1, 'B-101', 1, 0, 0, 0),
@@ -262,26 +265,22 @@ CREATE TABLE `staff` (
   `address` varchar(100) NOT NULL,
   `contact_no` bigint(20) NOT NULL,
   `salary` bigint(20) NOT NULL,
+  `dob` date DEFAULT NULL,
   `joining_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `staff`
 --
 
-INSERT INTO `staff` (`emp_id`, `emp_name`, `staff_type_id`, `shift_id`, `id_card_type`, `id_card_no`, `address`, `contact_no`, `salary`, `joining_date`, `updated_at`) VALUES
-(1, 'Prem Chand Saini', 1, 3, 1, '422510099122', 'Jaipur, Rajasthan', 987554425, 100000, '2017-11-13 05:39:06', '2017-11-17 06:53:05'),
-(2, 'Anjali Kumari', 3, 3, 1, '422510099122', 'Jaipur, Rajasthan', 976543211, 10000, '0000-00-00 00:00:00', '2017-11-13 05:44:10'),
-(3, 'Ajit Kumar Jain', 2, 3, 1, '422510099122', 'Ap #897-1459 Quam Avenue', 976543111, 10000, '2017-11-13 05:40:18', '2017-11-15 06:52:49'),
-(4, 'Deepak Goyal', 2, 3, 2, '0', 'Ap #897-1459 Quam Avenue', 987654321, 100000, '2017-11-13 05:40:55', '2017-11-15 06:52:35'),
-(5, 'Sharad Patel', 4, 1, 1, '12345341212', 'Ap #897-1459 Quam Avenue', 9876543212, 10000, '2017-11-13 05:41:31', '2017-11-13 05:41:31'),
-(6, 'Vijay Anand', 3, 3, 3, '0', 'Ap #897-1459 Quam Avenue', 1234567890, 100000, '2017-11-13 05:42:03', '2017-11-13 05:42:03'),
-(7, 'Lalit  Kumar', 2, 2, 1, '422510099122', 'Ap #897-1459 Quam Avenue', 12322332231, 100000, '2017-11-13 05:42:35', '2017-11-18 07:05:02'),
-(8, 'Rajeev Kumar Singh', 1, 1, 4, '0', 'Ap #897-1459 Quam Avenue', 976543456, 10000, '2017-11-13 05:43:13', '2017-11-18 07:02:26'),
-(9, 'Himanshu  Soni', 3, 2, 4, '0', 'Ap #897-1459 Quam Avenue', 98765432123, 100000, '2017-11-13 05:43:49', '2017-11-13 05:43:49'),
-(10, 'Sandeep Merutha', 5, 2, 1, '422510099122', 'Ap #897-1459 Quam Avenue', 9887665534, 1000, '2017-11-13 06:30:45', '2017-11-18 07:04:28'),
-(11, 'Aniket Raj', 3, 2, 1, '0', 'Ap #897-1459 Quam Avenue', 9887556655, 10000, '2017-11-18 07:04:03', '2017-11-18 07:04:03');
+INSERT INTO `staff` (`emp_id`, `emp_name`, `staff_type_id`, `shift_id`, `id_card_type`, `id_card_no`, `address`, `contact_no`, `salary`, `dob`, `joining_date`, `updated_at`, `username`, `password`) VALUES
+(1, 'Premmm Chand', 1, 3, 1, '422510099122', 'Jaipur, Rajasthan', 987554425, 100000, '2017-12-20', '0000-00-00 00:00:00', '2017-12-07 06:50:00', 'admin', 'admin'),
+(2, 'Anjali Kumari', 2, 3, 1, '422510099122', 'Jaipur, Rajasthan', 976543211, 10000, '2017-11-07', '0000-00-00 00:00:00', '2017-12-06 13:58:30', 'test', 'test'),
+(14, 'qw qw', 1, 2, 1, '3443', 'qw', 1, 12, '2017-12-26', '2017-12-07 11:32:43', '2017-12-07 11:32:43', 'qw', 'qw'),
+(15, 'cc xcx', 1, 3, 2, '422510099122', 'xcx', 2, 12, '2017-12-16', '2017-12-07 11:41:38', '2017-12-07 11:41:38', 'xc', 'xc');
 
 -- --------------------------------------------------------
 
@@ -301,9 +300,7 @@ CREATE TABLE `staff_type` (
 INSERT INTO `staff_type` (`staff_type_id`, `staff_type`) VALUES
 (1, 'Manager'),
 (2, 'Cleaning'),
-(3, 'Reception'),
-(4, 'Cook'),
-(5, 'Waiter');
+(3, 'Reception');
 
 -- --------------------------------------------------------
 
@@ -317,17 +314,18 @@ CREATE TABLE `user` (
   `username` varchar(15) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `identity` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `username`, `email`, `password`, `created_at`) VALUES
-(1, 'Prem Chand', 'pcsaini', 'premchandsaini779@gmail.com', '37a7e2cf07ff08f43e5cd844e567a23f', '2017-11-12 10:04:03'),
-(2, 'Ajit Kumar', '201452064', '201452064@iiitvadoda.ac.in', 'fb1e75090b96d2e0abec0ec980c2f392', '2017-11-12 12:49:22'),
-(3, 'Sharad Patel', '201452030', '201452030@iiitvadodara.ac.in', 'd0a512f262ed34abed0c45cefe08c429', '2017-11-12 12:49:22');
+INSERT INTO `user` (`id`, `name`, `username`, `email`, `password`, `created_at`, `identity`) VALUES
+(1, 'Prem Chand', 'admin', 'premchandsaini779@gmail.com', 'admin', '2017-11-12 10:04:03', 1),
+(2, 'Ajit Kumar', 'test', '201452064@iiitvadoda.ac.in', 'test', '2017-11-12 12:49:22', 2),
+(3, 'Sharad Patel', '201452030', '201452030@iiitvadodara.ac.in', 'd0a512f262ed34abed0c45cefe08c429', '2017-11-12 12:49:22', 0);
 
 --
 -- Indexes for dumped tables
@@ -355,12 +353,18 @@ ALTER TABLE `customer`
   ADD KEY `customer_id_type` (`id_card_type_id`);
 
 --
--- Indexes for table `emp_history`
+-- Indexes for table `duty`
 --
-ALTER TABLE `emp_history`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `emp_id` (`emp_id`),
-  ADD KEY `shift_id` (`shift_id`);
+ALTER TABLE `duty`
+  ADD PRIMARY KEY (`duty_id`);
+
+--
+-- Indexes for table `housekeeping`
+--
+ALTER TABLE `housekeeping`
+  ADD PRIMARY KEY (`housekeeping_id`),
+  ADD KEY `hkEmp` (`emp_id`),
+  ADD KEY `hkDuty` (`duty_id`);
 
 --
 -- Indexes for table `id_card_type`
@@ -431,10 +435,16 @@ ALTER TABLE `customer`
   MODIFY `customer_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `emp_history`
+-- AUTO_INCREMENT for table `duty`
 --
-ALTER TABLE `emp_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+ALTER TABLE `duty`
+  MODIFY `duty_id` int(1) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `housekeeping`
+--
+ALTER TABLE `housekeeping`
+  MODIFY `housekeeping_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `id_card_type`
@@ -464,13 +474,13 @@ ALTER TABLE `shift`
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `staff_type`
 --
 ALTER TABLE `staff_type`
-  MODIFY `staff_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `staff_type_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -496,11 +506,11 @@ ALTER TABLE `customer`
   ADD CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`id_card_type_id`) REFERENCES `id_card_type` (`id_card_type_id`);
 
 --
--- Constraints for table `emp_history`
+-- Constraints for table `housekeeping`
 --
-ALTER TABLE `emp_history`
-  ADD CONSTRAINT `emp_history_ibfk_1` FOREIGN KEY (`emp_id`) REFERENCES `staff` (`emp_id`),
-  ADD CONSTRAINT `emp_history_ibfk_2` FOREIGN KEY (`shift_id`) REFERENCES `shift` (`shift_id`);
+ALTER TABLE `housekeeping`
+  ADD CONSTRAINT `hkDuty` FOREIGN KEY (`duty_id`) REFERENCES `duty` (`Duty_ID`),
+  ADD CONSTRAINT `hkEmp` FOREIGN KEY (`emp_id`) REFERENCES `staff` (`emp_id`);
 
 --
 -- Constraints for table `room`
