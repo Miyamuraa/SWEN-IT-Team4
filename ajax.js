@@ -386,6 +386,7 @@ $('#addEmployee').submit(function () {
 			username:username,
 			password:password,
             add_employee:''
+			
 
         },
         success: function (response) {
@@ -401,33 +402,35 @@ $('#addEmployee').submit(function () {
     return false;
 });
 
-$('#addHousekeep').submit(function () {
 
-    var emp_id = $('#emp_id').val();
-    var duty_id = $('#duty_id').val();
-    var schedule_startdate = $('#schedule_startdate').val();
-    var schedule_enddate = $('#schedule_enddate').val();
-    var duty_remark = $('#duty_remark').val();
+$('#addHousekeep').submit(function () {
+	
+	var emp_id =$('#emp_id').val();
+	var duty_id =$('#duty_id').val();
+    var duty_remark =$('#duty_remark').val();
+	var schedule_startdate =$('#schedule_startdate').val();
+	var schedule_enddate =$('#schedule_enddate').val();
 
     $.ajax({
         type: 'post',
         url: 'ajax.php',
         dataType: 'JSON',
         data: {
-            emp_id:emp_id,
-            duty:duty,
-            schedule_startdate:schedule_startdate,
-            schedule_enddate:schedule_enddate,
+			emp_id:emp_id,
+			duty_id:duty_id,
             duty_remark:duty_remark,
+			schedule_startdate:schedule_startdate,
+			schedule_enddate:schedule_enddate,
             add_housekeep:''
+			
 
         },
         success: function (response) {
             if (response.done == true){
                 document.getElementById("addHousekeep").reset();
-                $('.hh-response').html('<div class="alert bg-success alert-dismissable" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>Housekeep Successfully Added</div>');
+                $('.emp-response').html('<div class="alert bg-success alert-dismissable" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>Employee Successfully Added</div>');
             }else{
-                $('.hh-response').html('<div class="alert bg-danger alert-dismissable" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>' + response.data + '</div>');
+                $('.emp-response').html('<div class="alert bg-danger alert-dismissable" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>' + response.data + '</div>');
             }
         }
     });
@@ -435,18 +438,6 @@ $('#addHousekeep').submit(function () {
     return false;
 });
 
-/*
-$('#addHousekeep').submit(function () {
-    var emp_id = $('#emp_id').val();
-    var duty_id = $('#duty_id').val();
-    var schedule_startdate = $('#schedule_startdate').val();
-    var schedule_enddate = $('#schedule_enddate').val();
-    var duty_remark = $('#duty_remark').val();
-	alert(emp_id + "," + duty_id+ "," +schedule_startdate+ "," +schedule_enddate+ "," +duty_remark);
-	
-	
-});
-*/
 $('#edit_employee').submit(function () {
 
     var staff_type = $('#staff_type').val();
@@ -459,9 +450,6 @@ $('#edit_employee').submit(function () {
     var joining_date = $('#joining_date').val();
     var address = $('#address').val();
     var salary =$('#salary').val();
-	var dob =$('#dob').val();
-    var username =$('#username').val();
-	var password =$('#password').val();
 
 //alert(first_name);
     $.ajax({
@@ -479,9 +467,6 @@ $('#edit_employee').submit(function () {
             joining_date:joining_date,
             address:address,
             salary:salary,
-			dob:dob,
-			username:username,
-			password:password,
             add_employee:'',
 
         },

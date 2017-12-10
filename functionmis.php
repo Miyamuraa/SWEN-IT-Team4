@@ -42,11 +42,12 @@ if (isset($_POST['submit'])) {
     $contact_no = $_POST['contact_no'];
     $joining_date = strtotime($_POST['joining_date']);
     $salary = $_POST['salary'];
-	$dob = $_POST['dob'];
+	$username = $_POST['username'];
+	$password = $_POST['password'];
 
     $query="UPDATE staff
 SET emp_name='$first_name $last_name', staff_type_id='$staff_type_id', shift_id='$shift_id', id_card_type=$id_card_type,
-id_card_no='$id_card_no',address='$address',contact_no='$contact_no',joining_date='$joining_date',salary='$salary', dob='$dob'
+id_card_no='$id_card_no',address='$address',contact_no='$contact_no',joining_date='$joining_date',salary='$salary',username='$username',password='$password'
 WHERE emp_id=$emp_id ";
 //echo $query;
     if (mysqli_query($connection, $query)) {
@@ -54,22 +55,7 @@ WHERE emp_id=$emp_id ";
     } else {
         echo "Error updating record: " . mysqli_error($conn);
     }
-
-
 }
-
-if (isset($_GET['empid'])!="")
-{
-   $emp_id=$_GET['empid'];
-    $deleteQuery = "DELETE FROM staff WHERE emp_id=$emp_id";
-    if (mysqli_query($connection, $deleteQuery)) {
-        header('Location: index.php?staff_mang');
-    } else {
-        echo "Error updating record: " . mysqli_error($connection);
-    }
-}
-
-
 
 
 if (isset($_POST['submit2'])) {
@@ -86,10 +72,44 @@ SET duty_remark='$duty_remark', schedule_startdate='$schedule_startdate', schedu
 WHERE housekeeping_id=$housekeeping_id ";
 //echo $query;
     if (mysqli_query($connection, $query)) {
-        header('Location: index3.php?housekeeping');
+        header('Location: index.php?housekeeping');
     } else {
         echo "Error updating record: " . mysqli_error($connection);
     }
 }
+
+if (isset($_GET['empid'])!="")
+{
+   $emp_id=$_GET['empid'];
+    $deleteQuery = "DELETE FROM staff WHERE emp_id=$emp_id";
+    if (mysqli_query($connection, $deleteQuery)) {
+        header('Location: index.php?staff_mang');
+    } else {
+        echo "Error updating record: " . mysqli_error($connection);
+    }
+}
+
+if (isset($_GET['hkemp'])!="")
+{
+   $hkemp=$_GET['hkemp'];
+    $deleteQuery = "DELETE FROM housekeeping WHERE housekeeping_id=$hkemp";
+    if (mysqli_query($connection, $deleteQuery)) {
+        header('Location: index.php?housekeeping');
+    } else {
+        echo "Error updating record: " . mysqli_error($connection);
+    }
+}
+
+if (isset($_GET['hkemp2'])!="")
+{
+   $hkemp2=$_GET['hkemp2'];
+    $deleteQuery = "DELETE FROM housekeeping WHERE housekeeping_id=$hkemp2";
+    if (mysqli_query($connection, $deleteQuery)) {
+        header('Location: index2.php?housekeeping');
+    } else {
+        echo "Error updating record: " . mysqli_error($connection);
+    }
+}
+
 
 ?>

@@ -116,7 +116,7 @@ if (mysqli_num_rows($staff_result) > 0) {
 
         <!-- Employee Detail-->
         <div id="empDetail<?php echo $staffGlobal['emp_id']; ?>" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog" style="width: 60%;">
 
                 <!-- Modal content-->
                 <div class="modal-content">

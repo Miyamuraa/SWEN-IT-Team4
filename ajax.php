@@ -7,7 +7,7 @@ if (isset($_POST['login'])) {
     $password = $_POST['password'];
 	$staff_type_id = $_GET['staff_type_id'];
 
-    if (!$username && !$password && !$staff_type_id) {
+if (!$username && !$password && !$staff_type_id) {
         header('Location:login.php?empty');
     } else {
 
@@ -27,13 +27,13 @@ if (isset($_POST['login'])) {
 			$user = mysqli_fetch_assoc($resultt);
             $_SESSION['username'] = $user['username'];
             $_SESSION['user_id'] = $user['emp_id'];
-            header('Location:index3.php');
+            header('Location:index2.php');
         }
 		else if (mysqli_num_rows($resulttt) == 1){
 			$user = mysqli_fetch_assoc($resulttt);
             $_SESSION['username'] = $user['username'];
             $_SESSION['user_id'] = $user['emp_id'];
-            header('Location:index2.php');
+            header('Location:index3.php');
         } else {
 			header('Location:login.php?loginE');
 		}
@@ -354,23 +354,21 @@ if (isset($_POST['add_employee'])) {
     echo json_encode($response);
 }
 
+
 if (isset($_POST['add_housekeep'])) {
+	
+	$emp_id = $_POST['emp_id'];
+	$duty_id = $_POST['duty_id'];
+    $duty_remark = $_POST['duty_remark'];
+	$schedule_startdate = $_POST['schedule_startdate'];
+	$schedule_enddate = $_POST['schedule_enddate'];
 
-	$duty_remark = $_POST['duty_remark'];
-    $schedule_startdate = $_POST['schedule_startdate'];
-    $schedule_enddate = $_POST['schedule_enddate'];
-    $emp_id = $_POST['emp_id'];
-    $duty_id = $_POST['duty_id'];
-
-    
-
-    if ($emp_id == '' && $duty_id == '' && $schedule_startdate == '' && $schedule_enddate == ''){
+    if ($duty_remark == '' && $schedule_startdate == '' && $schedule_enddate == '' && $emp_id == '' && $duty_id == ''){
         $response['done'] = false;
         $response['data'] = "Please Enter Cardinalities";
     }else{
-       $customer_sql = "INSERT INTO housekeeping (duty_remark,schedule_startdate,schedule_enddate,emp_id,duty_id) VALUES ('$duty_remark','$schedule_startdate','$schedule_enddate','$emp_id','$duty_id')";
-        
-		$customer_result = mysqli_query($connection, $customer_sql);
+        $customer_sql = "INSERT INTO housekeeping (duty_remark,schedule_startdate,schedule_enddate,emp_id,duty_id) VALUES ('$duty_remark','$schedule_startdate','$schedule_enddate','$emp_id','$duty_id')";
+        $customer_result = mysqli_query($connection, $customer_sql);
         //$housekeeping_id = mysqli_insert_id($connection);
         if ($customer_result) {
             $response['done'] = true;
@@ -382,6 +380,7 @@ if (isset($_POST['add_housekeep'])) {
     }
     echo json_encode($response);
 }
+
 
 if (isset($_POST['createComplaint'])) {
     $complainant_name = $_POST['complainant_name'];
@@ -416,7 +415,7 @@ if (isset($_POST['change_shift'])) {
     $shift_id = $_POST['shift_id'];
     $query = "UPDATE staff set shift_id = '$shift_id' WHERE emp_id='$emp_id'";
     $result = mysqli_query($connection, $query);
-
+    $to_date = date("Y-m-d H:i:s");
 
     if ($result) {
         header("Location:index.php?staff_mang&success");

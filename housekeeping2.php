@@ -17,9 +17,6 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Employee Details:
-                    <a href="index.php?add_housekeep" class="btn btn-info pull-right">Add Housekeeping</a>
-                </div>
                 <div class="panel-body">
                     <?php
                     if (isset($_GET['error'])) {
@@ -43,7 +40,7 @@
                             <th>Schedule Start Date</th>
                             <th>Schedule End Date</th>
 							<th>Duty Remarks</th>
-                            <th>Action</th>
+                            <!--<th>Action</th>-->
                         </tr>
                         </thead>
                         <tbody>
@@ -62,7 +59,7 @@
                                     <td><?php echo $staff['schedule_startdate']; ?></td>
 									<td><?php echo $staff['schedule_enddate']; ?></td>				
 									<td><?php echo $staff['duty_remark']; ?></td>
-									
+									<!--
                                     <td>
 
                                         <button data-toggle="modal"
@@ -70,11 +67,11 @@
                                                 data-id="<?php echo $staff['housekeeping_id']; ?>" id="editEmp"
                                                 class="btn btn-info"><i class="fa fa-pencil"></i></button>
 												
-                                        <a href='functionmis.php?hkemp=<?php echo $staff['housekeeping_id']; ?>'
+                                        <a href='functionmis.php?hkemp2=<?php echo $staff['housekeeping_id']; ?>'
                                            class="btn btn-success" onclick="return confirm('Are you Sure?')"><i
                                                     class="fa fa-check"></i></a>
                    
-                                    </td>
+                                    </td>-->
                                 </tr>
 
 

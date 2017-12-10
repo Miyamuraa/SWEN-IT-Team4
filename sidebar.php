@@ -7,7 +7,6 @@
         <div class="profile-usertitle">
             <div class="profile-usertitle-name"><?php echo $user['emp_name'];?></div>
             <div class="profile-usertitle-status"><span class="indicator label-success"></span>Manager</div>
-			<!--<?php echo $user['staff_type_id'];?>-->
         </div>
         <div class="clear"></div>
     </div>
@@ -78,8 +77,21 @@
                     Add Housekeeping
                 </a>
             </li>
-<?php }?>
+		<?php }
+        if (isset($_GET['housekeeping'])){ ?>
+            <li class="active">
+                <a href="index.php?housekeeping"><em class="fa fa-dashboard">&nbsp;</em>
+                    Housekeeping
+                </a>
+            </li>
+        <?php } else{?>
+            <li>
+                <a href="index.php?housekeeping"><em class="fa fa-dashboard">&nbsp;</em>
+                    Housekeeping
+                </a>
+            </li>
 
+<?php }?>
 
         <li><a href="logout.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
     </ul>

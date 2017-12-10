@@ -6,12 +6,12 @@ if (isset($_SESSION['user_id'])){
     $userQuery = "SELECT * FROM staff WHERE emp_id = '$user_id'";
     $result = mysqli_query($connection, $userQuery);
     $user = mysqli_fetch_assoc($result);
-	
 }else{
     header('Location:login.php');
 }
 include_once "header.php";
 include_once "sidebar.php";
+
 
 if (isset($_GET['room_mang'])){
     include_once "room_mang.php";
@@ -28,8 +28,12 @@ elseif (isset($_GET['add_emp'])){
 elseif (isset($_GET['add_housekeep'])){
     include_once "add_housekeep.php";
 }
-else{
+elseif (isset($_GET['housekeeping'])){
     include_once "housekeeping.php";
+}
+
+else{
+    include_once "room_mang.php";
 }
 
 include_once "footer.php";

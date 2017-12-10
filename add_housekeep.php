@@ -31,7 +31,7 @@
                                     $result = mysqli_query($connection, $query);
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($staff = mysqli_fetch_assoc($result)) {
-                                            echo '<option value="' . $staff['emp_id'] . '">' . $staff['emp_id'] . '</option>';
+                                            echo '<option value="' . $staff['emp_id'] . '">' . $staff['emp_name'] . '</option>';
                                         }
                                     }
                                     ?>
@@ -48,7 +48,7 @@
                                     $result = mysqli_query($connection, $query);
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($shift = mysqli_fetch_assoc($result)) {
-                                            echo '<option value="' . $shift['duty_id'] . '">' . $shift['duty_id'] . '</option>';
+                                            echo '<option value="' . $shift['duty_id'] . '">' . $shift['duty_type'] . '</option>';
                                         }
                                     }
                                     ?>
@@ -59,26 +59,28 @@
                             <div class="form-group col-lg-6">
                                 <label>Schedule Start Date</label>
                                 <input type="date" class="form-control" placeholder="Schedule Start Date"
-                                 id="schedule_startdate" required>
+                                 id="schedule_startdate" required data-error="Select Start Date">
+								 <div class="help-block with-errors"></div>
                             </div>
 
                             <div class="form-group col-lg-6">
                                 <label>Schedule End Date</label>
                                 <input type="date" class="form-control" placeholder="Schedule End Date"
-                                 id="schedule_enddate"required>
+                                 id="schedule_enddate" required data-error="Select End Date">
+								 <div class="help-block with-errors"></div>
+                            </div>
+							<div class="form-group col-lg-3">
+                            <label>Duty Remark</label>
+                            <input type="text" class="form-control" placeholder="Duty Remark" id="duty_remark">
+							
                             </div>
 							
 							
-							
-                            <div class="form-group col-lg-6">
-                            <label>Duty Remarks</label>
-                            <textarea rows="5" cols="3" class="form-control" placeholder="Duty Remarks" style="resize: none";
-                                 id="duty_remark" required></textarea>
-                            </div>
+                          
 
                             </div>
-
                         </div>
+
 
                         <button type="submit" class="btn btn-lg btn-primary">Submit</button>
                         <button type="reset" class="btn btn-lg btn-danger">Reset</button>
