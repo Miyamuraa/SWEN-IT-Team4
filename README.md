@@ -1,4 +1,4 @@
-# Delonix Hotel Managemen System
+# Delonix Hotel Management System
 
 Credits: https://github.com/pcsaini/hotel_management_system
 
