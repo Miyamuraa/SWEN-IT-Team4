@@ -43,7 +43,7 @@
                             <th>Shift</th>
                             <th>Joining Date</th>
                             <th>Salary</th>
-							<th>Date of Birth</th>
+							<th>Contact</th>
                             <th>Change Shift</th>
                             <th>Action</th>
                         </tr>
@@ -64,7 +64,7 @@
                                     <td><?php echo $staff['shift'] . ' - ' . $staff['shift_timing']; ?></td>
                                     <td><?php echo date('M j, Y', strtotime($staff['joining_date'])); ?></td>
                                     <td><?php echo $staff['salary']; ?></td>
-									<td><?php echo $staff['dob']; ?></td>
+									<td><?php echo $staff['contact_no']; ?></td>
                                     <td>
                                         <button class="btn btn-primary" data-toggle="modal" data-target="#changeShift"
                                                 data-id="<?php echo $staff['emp_id']; ?>" id="change_shift">Change Shift</button>
@@ -185,10 +185,10 @@ if (mysqli_num_rows($staff_result) > 0) {
                                                 </div>
 
                                                 <div class="form-group col-lg-6">
-                                                    <label>ID Card Type</label>
+                                                    <label>Bank Card Type</label>
                                                     <select class="form-control" id="id_card_id" name="id_card_type"
                                                             required>
-                                                        <option selected disabled>Select ID Card Type</option>
+                                                        <option selected disabled>Select Bank Card Type</option>
                                                         <?php
                                                         $query = "SELECT * FROM id_card_type";
                                                         $result = mysqli_query($connection, $query);
@@ -205,8 +205,8 @@ if (mysqli_num_rows($staff_result) > 0) {
                                                 </div>
 
                                                 <div class="form-group col-lg-6">
-                                                    <label>Bank Account No</label>
-                                                    <input type="text" class="form-control" placeholder="Bank Account No"
+                                                    <label>Bank Account Number</label>
+                                                    <input type="text" class="form-control" placeholder="Bank Account Number"
                                                            id="id_card_no"
                                                            value="<?php echo $staffGlobal['id_card_no']; ?>"
                                                            name="id_card_no" required>
@@ -241,8 +241,8 @@ if (mysqli_num_rows($staff_result) > 0) {
                                                 </div>
 												
 												<div class="form-group col-lg-6">
-                                                    <label>Username</label>
-                                                    <input type="text" class="form-control" placeholder="Username"
+                                                    <label>NRIC</label>
+                                                    <input type="text" class="form-control" placeholder="NRIC"
                                                            id="username" value="<?php echo $staffGlobal['username']; ?>"
                                                            name="username" required>
                                                 </div>

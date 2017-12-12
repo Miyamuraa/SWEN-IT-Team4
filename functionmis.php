@@ -100,16 +100,7 @@ if (isset($_GET['hkemp'])!="")
     }
 }
 
-if (isset($_GET['hkemp2'])!="")
-{
-   $hkemp2=$_GET['hkemp2'];
-    $deleteQuery = "DELETE FROM housekeeping WHERE housekeeping_id=$hkemp2";
-    if (mysqli_query($connection, $deleteQuery)) {
-        header('Location: index2.php?housekeeping');
-    } else {
-        echo "Error updating record: " . mysqli_error($connection);
-    }
-}
+
 
 
 ?>

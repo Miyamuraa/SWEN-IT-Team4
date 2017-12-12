@@ -113,6 +113,9 @@ if (mysqli_num_rows($staff_result) > 0) {
         <div id="empDetail<?php echo $staffGlobal['housekeeping_id']; ?>" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
+			
+			
+			
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
@@ -126,6 +129,8 @@ if (mysqli_num_rows($staff_result) > 0) {
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Housekeeping Detail:</div>
                                     <div class="panel-body">
+																	
+								
                                         <form data-toggle="validator" role="form" action="functionmis.php"
                                               method="post">
                                             <div class="row">
@@ -195,6 +200,8 @@ if (mysqli_num_rows($staff_result) > 0) {
                                             </button>
                                             <button type="reset" class="btn btn-lg btn-danger">Reset</button>
                                         </form>
+										
+										
                                     </div>
                                 </div>
                             </div>

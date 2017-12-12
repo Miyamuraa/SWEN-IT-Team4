@@ -156,9 +156,9 @@ if (isset($_GET['room_id'])){
                             </div>
 
                             <div class="form-group col-lg-6">
-                                <label>ID Card Type</label>
-                                <select class="form-control" id="id_card_id" data-error="Select ID Card Type" required onchange="validId(this.value);">
-                                    <option selected disabled>Select ID Card Type</option>
+                                <label>Bank Card Type</label>
+                                <select class="form-control" id="id_card_id" data-error="Select Bank Card Type" required>
+                                    <option selected disabled>Select Bank Card Type</option>
                                     <?php
                                     $query  = "SELECT * FROM id_card_type";
                                     $result = mysqli_query($connection,$query);
@@ -172,8 +172,8 @@ if (isset($_GET['room_id'])){
                             </div>
 
                             <div class="form-group col-lg-6">
-                                <label>ID Card No</label>
-                                <input type="text" class="form-control" placeholder="ID Card No" id="id_card_no" data-error="Enter Valid ID Card No" required>
+                                <label>Bank Card Number</label>
+                                <input type="text" class="form-control" placeholder="Bank Card Number" id="id_card_no" data-error="Enter Bank Card Number" required>
                                 <div class="help-block with-errors"></div>
                             </div>
 

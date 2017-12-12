@@ -18,14 +18,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Housekeeping Detail:</div>
                 <div class="panel-body">
-                    <div class="hh-response"></div>
+				
+                    <div class="emp-responsee"></div>
+					
                     <form role="form" id="addHousekeep" data-toggle="validator">
                         <div class="row">
 						<div class="col-lg-12">
                             <div class="form-group col-lg-6">
                                 <label>Staff</label>
                                 <select class="form-control" id="emp_id" required data-error="Select Staff">
-                                    <option selected disabled>Select Staff</option>
+                                    <option disabled selected value>Select Staff</option>
                                     <?php
                                     $query = "SELECT * FROM staff WHERE staff_type_id=2";
                                     $result = mysqli_query($connection, $query);
@@ -42,7 +44,7 @@
                             <div class="form-group col-lg-6">
                                 <label>Duty</label>
                                 <select class="form-control" id="duty_id" required data-error="Select Duty Type">
-                                    <option selected disabled>Select Duty Type</option>
+                                    <option disabled selected value>Select Duty Type</option>
                                     <?php
                                     $query = "SELECT * FROM duty";
                                     $result = mysqli_query($connection, $query);

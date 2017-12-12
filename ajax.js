@@ -95,30 +95,6 @@ function fetch_room(val) {
     });
 }
 
-function validId(val) {
-    if (val ==1){
-        document.getElementById('id_card_no').setAttribute('type','number');
-        document.getElementById('id_card_no').setAttribute('data-minlength','12');
-        document.getElementById('id_card_no').setAttribute('placeholder',"123212321232");
-        document.getElementById('id_card_no').setAttribute('data-error',"Enter 12 Digit Valid Aadhar Card No");
-    }else if(val ==2){
-        document.getElementById('id_card_no').setAttribute('type','text');
-        document.getElementById('id_card_no').setAttribute('data-minlength','11');
-        document.getElementById('id_card_no').setAttribute('placeholder',"ABS/1010101");
-        document.getElementById('id_card_no').setAttribute('data-error',"Enter 11 Character(include '/') Valid Voter ID Card No");
-    }else if(val ==3){
-        document.getElementById('id_card_no').setAttribute('type','text');
-        document.getElementById('id_card_no').setAttribute('data-minlength','10');
-        document.getElementById('id_card_no').setAttribute('placeholder',"GAHAH7878A");
-        document.getElementById('id_card_no').setAttribute('data-error',"Enter 10 Character Valid Pan Card No");
-    }else if(val == 4){
-        document.getElementById('id_card_no').setAttribute('type','text');
-        document.getElementById('id_card_no').setAttribute('data-minlength','16');
-        document.getElementById('id_card_no').setAttribute('placeholder',"RJ29 20170065432");
-        document.getElementById('id_card_no').setAttribute('data-error',"Enter 16 Character(include space) Valid Licence Number");
-    }
-}
-
 function fetch_price(val) {
     $.ajax({
         type: 'post',
@@ -428,9 +404,9 @@ $('#addHousekeep').submit(function () {
         success: function (response) {
             if (response.done == true){
                 document.getElementById("addHousekeep").reset();
-                $('.emp-response').html('<div class="alert bg-success alert-dismissable" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>Employee Successfully Added</div>');
+                $('.emp-responsee').html('<div class="alert bg-success alert-dismissable" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>Successfully Added Housekeeping</div>');
             }else{
-                $('.emp-response').html('<div class="alert bg-danger alert-dismissable" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>' + response.data + '</div>');
+                $('.emp-responsee').html('<div class="alert bg-danger alert-dismissable" role="alert"><em class="fa fa-lg fa-warning">&nbsp;</em>' + response.data + '</div>');
             }
         }
     });
@@ -447,7 +423,7 @@ $('#edit_employee').submit(function () {
     var contact_no = $('#contact_no').val();
     var id_card_id = $('#id_card_id').val();
     var id_card_no = $('#id_card_no').val();
-    var joining_date = $('#joining_date').val();
+    var dob = $('#dob').val();
     var address = $('#address').val();
     var salary =$('#salary').val();
 
@@ -464,7 +440,7 @@ $('#edit_employee').submit(function () {
             contact_no:contact_no,
             id_card_id:id_card_id,
             id_card_no:id_card_no,
-            joining_date:joining_date,
+            dob:dob,
             address:address,
             salary:salary,
             add_employee:'',

@@ -13,24 +13,27 @@ if (!$username && !$password && !$staff_type_id) {
 
         $query = "SELECT * FROM staff WHERE username = '$username' AND password='$password' AND staff_type_id=1";
         $result = mysqli_query($connection, $query);
+		
 		$queryy = "SELECT * FROM staff WHERE username = '$username' AND password='$password' AND staff_type_id=2";
-        $resultt = mysqli_query($connection, $queryy);
+        $result2 = mysqli_query($connection, $queryy);
+		
 		$queryyy = "SELECT * FROM staff WHERE username = '$username' AND password='$password' AND staff_type_id=3";
-        $resulttt = mysqli_query($connection, $queryyy);
+        $result3 = mysqli_query($connection, $queryyy);
+		
         if (mysqli_num_rows($result) == 1) {
             $user = mysqli_fetch_assoc($result);
             $_SESSION['username'] = $user['username'];
             $_SESSION['user_id'] = $user['emp_id'];
             header('Location:index.php');
         } 
-		else if (mysqli_num_rows($resultt) == 1){
-			$user = mysqli_fetch_assoc($resultt);
+		else if (mysqli_num_rows($result2) == 1){
+			$user = mysqli_fetch_assoc($result2);
             $_SESSION['username'] = $user['username'];
             $_SESSION['user_id'] = $user['emp_id'];
             header('Location:index2.php');
         }
-		else if (mysqli_num_rows($resulttt) == 1){
-			$user = mysqli_fetch_assoc($resulttt);
+		else if (mysqli_num_rows($result3) == 1){
+			$user = mysqli_fetch_assoc($result3);
             $_SESSION['username'] = $user['username'];
             $_SESSION['user_id'] = $user['emp_id'];
             header('Location:index3.php');
@@ -165,10 +168,13 @@ if (isset($_POST['booking'])) {
     $id_card_no = $_POST['id_card_no'];
     $address = $_POST['address'];
 
+	
+	$num_length = strlen((string)$contact_no);
+	if ($num_length == 8) {
     $customer_sql = "INSERT INTO customer (customer_name,contact_no,email,id_card_type_id,id_card_no,address) VALUES ('$name','$contact_no','$email','$id_card_id','$id_card_no','$address')";
     $customer_result = mysqli_query($connection, $customer_sql);
-
-    if ($customer_result) {
+	
+	    if ($customer_result) {
         $customer_id = mysqli_insert_id($connection);
         $booking_sql = "INSERT INTO booking (customer_id,room_id,check_in,check_out,total_price,remaining_price) VALUES ('$customer_id','$room_id','$check_in','$check_out','$total_price','$total_price')";
         $booking_result = mysqli_query($connection, $booking_sql);
@@ -189,6 +195,14 @@ if (isset($_POST['booking'])) {
         $response['done'] = false;
         $response['data'] = "DataBase Error add customer";
     }
+	}
+	
+	else {
+		$response['done'] = false;
+        $response['data'] = "contact number must be 8 digits";
+	}
+
+	
 
     echo json_encode($response);
 }
@@ -196,7 +210,8 @@ if (isset($_POST['booking'])) {
 if (isset($_POST['cutomerDetails'])) {
     //$customer_result='';
     $room_id = $_POST['room_id'];
-
+	
+	
     if ($room_id != '') {
         $sql = "SELECT * FROM room NATURAL JOIN room_type NATURAL JOIN booking NATURAL JOIN customer WHERE room_id = '$room_id' AND payment_status = '0'";
         $result = mysqli_query($connection, $sql);
@@ -215,7 +230,9 @@ if (isset($_POST['cutomerDetails'])) {
             $response['id_card_type_id'] = $id_type_name['id_card_type'];
             $response['address'] = $customer_details['address'];
             $response['remaining_price'] = $customer_details['remaining_price'];
-        } else {
+        } 		
+		
+		else {
             $response['done'] = false;
             $response['data'] = "DataBase Error";
         }
@@ -336,16 +353,16 @@ if (isset($_POST['add_employee'])) {
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 
-    if ($staff_type == '' && $shift == '' && $salary == ''){
+    if ($staff_type == '' && $shift == '' && $salary == '' && $username == '' && $password == '' && $dob == '' && $id_card_id == '' && $id_card_no == ''){
         $response['done'] = false;
-        $response['data'] = "Please Enter Cardinalities";
+        $response['data'] = "Please Enter Credentials";
     }else{
         $customer_sql = "INSERT INTO staff (emp_name,staff_type_id,shift_id,id_card_type,id_card_no,address,contact_no,salary,dob,username,password) VALUES ('$name','$staff_type','$shift','$id_card_id','$id_card_no','$address','$contact_no','$salary','$dob','$username','$password')";
         $customer_result = mysqli_query($connection, $customer_sql);
         //$emp_id = mysqli_insert_id($connection);
         if ($customer_result) {
             $response['done'] = true;
-            $response['data'] = 'Successfully Booking';
+            $response['data'] = 'Successfully Added';
         } else {
             $response['done'] = false;
             $response['data'] = "DataBase Error in status change";
@@ -372,7 +389,7 @@ if (isset($_POST['add_housekeep'])) {
         //$housekeeping_id = mysqli_insert_id($connection);
         if ($customer_result) {
             $response['done'] = true;
-            $response['data'] = 'Successfully Booking';
+            $response['data'] = 'Successfully Added';
         } else {
             $response['done'] = false;
             $response['data'] = "DataBase Error in status change";
@@ -381,33 +398,6 @@ if (isset($_POST['add_housekeep'])) {
     echo json_encode($response);
 }
 
-
-if (isset($_POST['createComplaint'])) {
-    $complainant_name = $_POST['complainant_name'];
-    $complaint_type = $_POST['complaint_type'];
-    $complaint = $_POST['complaint'];
-
-    $query = "INSERT INTO complaint (complainant_name,complaint_type,complaint) VALUES ('$complainant_name','$complaint_type','$complaint')";
-    $result = mysqli_query($connection, $query);
-    if ($result) {
-        header("Location:index.php?complain&success");
-    } else {
-        header("Location:index.php?complain&error");
-    }
-
-}
-
-if (isset($_POST['resolve_complaint'])) {
-    $budget = $_POST['budget'];
-    $complaint_id = $_POST['complaint_id'];
-    $query = "UPDATE complaint set budget = '$budget',resolve_status = '1' WHERE id='$complaint_id'";
-    $result = mysqli_query($connection, $query);
-    if ($result) {
-        header("Location:index.php?complain&resolveSuccess");
-    } else {
-        header("Location:index.php?complain&resolveError");
-    }
-}
 
 
 if (isset($_POST['change_shift'])) {

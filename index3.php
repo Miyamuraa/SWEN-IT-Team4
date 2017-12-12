@@ -17,7 +17,7 @@ if (isset($_GET['room_mang'])){
     include_once "room_mang.php";
 }
 elseif (isset($_GET['reservation'])){
-    include_once "reservation.php";
+    include_once "reservation2.php";
 }
 else{
     include_once "room_mang.php";

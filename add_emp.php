@@ -25,7 +25,7 @@
                             <div class="form-group col-lg-3">
                                 <label>Staff</label>
                                 <select class="form-control" id="staff_type" required data-error="Select Staff Type">
-                                    <option selected disabled>Select Staff Type</option>
+                                    <option disabled selected value>Select Staff Type</option>
                                     <?php
                                     $query = "SELECT * FROM staff_type";
                                     $result = mysqli_query($connection, $query);
@@ -42,7 +42,7 @@
                             <div class="form-group col-lg-3">
                                 <label>Shift</label>
                                 <select class="form-control" id="shift" required data-error="Select Shift Type">
-                                    <option selected disabled>Select Staff Type</option>
+                                    <option disabled selected value>Select Staff Type</option>
                                     <?php
                                     $query = "SELECT * FROM shift";
                                     $result = mysqli_query($connection, $query);
@@ -65,14 +65,15 @@
                             <div class="form-group col-lg-3">
                                 <label>Last Name</label>
                                 <input type="text" class="form-control" placeholder="Last Name" id="last_name" required data-error="Enter Last Name">
+								<div class="help-block with-errors"></div>
                             </div>
 							</div>
 							
 							<div class="col-lg-12">
                             <div class="form-group col-lg-3">
                                 <label>Bank Card Type</label>
-                                <select class="form-control" id="id_card_id" required data-error="Select Bank Card Type" onchange="validId(this.value);">
-                                    <option selected disabled>Select Bank Card Type</option>
+                                <select class="form-control" id="id_card_id" required data-error="Select Bank Card Type">
+                                    <option disabled selected value>Select Bank Card Type</option>
                                     <?php
                                     $query = "SELECT * FROM id_card_type";
                                     $result = mysqli_query($connection, $query);
@@ -100,7 +101,7 @@
 
                             <div class="form-group col-lg-3">
                                 <label>Address</label>
-                                <input type="text" class="form-control" placeholder="address" id="address">
+                                <input type="text" class="form-control" placeholder="address" id="address" required data-error="Enter Address">
                                 <div class="help-block with-errors"></div>
                             </div>
 							</div>
@@ -114,13 +115,13 @@
 							
 							<div class="form-group col-lg-3">
                             <label>Date of Birth</label>
-                            <input type="date" class="form-control" placeholder="Date of Birth" id="dob">
+                            <input type="date" class="form-control" placeholder="Date of Birth" id="dob" required data-error="Enter Date of Birth">
 							<div class="help-block with-errors"></div>
                             </div>
 							
 							<div class="form-group col-lg-3">
-                            <label>Username</label>
-                            <input type="text" class="form-control" placeholder="Username" id="username" required data-error="Enter Username">
+                            <label>NRIC</label>
+                            <input type="text" class="form-control" placeholder="NRIC" id="username" required data-error="Enter NRIC">
 							<div class="help-block with-errors"></div>
                             </div>
 							
